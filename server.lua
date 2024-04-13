@@ -2,7 +2,11 @@ ESX.RegisterServerCallback("cdk-sell:server:reward", function (src, cb, args, se
         local xPlayer = ESX.GetPlayerFromId(src)
         local randomPrice = math.random(args.priceMin, args.priceMax)
         xPlayer.removeInventoryItem(args.item, sellAmount)
-        xPlayer.addMoney(randomPrice * sellAmount)
+        if Config.GiveBlackMoney then
+            xPlayer.addAccountMoney('black_money', randomPrice * sellAmount)
+        else
+            xPlayer.addMoney(randomPrice * sellAmount)
+        end
 end)
 
 ESX.RegisterServerCallback("cdk-sell:server:checkItem", function (src, cb, args)
