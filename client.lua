@@ -1,13 +1,23 @@
 local target = exports.ox_target
 local selling = false
-
 local hasAsked = {}
+local option = {}
 
-RegisterCommand('salg', function()
-    local option = {}
-
+CreateThread(function ()
+    Wait(5000)
+    lib.addRadialItem ({
+        {
+            id = 'sell',
+            label = 'Sælg',
+            icon = 'fas fa-dollar-sign',
+            onSelect = function ()
+                lib.showMenu('sell')
+            end,
+        }
+    })
+    
     findItems(option)
-
+    
     lib.registerMenu({
         id = 'sell',
         title = 'Sælg',
@@ -15,13 +25,17 @@ RegisterCommand('salg', function()
     }, function(_, _, args)
         toggleSelling(args)
     end)
-
-    lib.showMenu('sell')
 end)
 
 RegisterNetEvent('cdk-sell:client:sellProcess')
 AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
     local targetEntity = entity.entity
+    if IsEntityDead(targetEntity) then
+        lib.notify({
+            type = 'error',
+            description = 'Personen er død',
+        })
+    else
     ESX.TriggerServerCallback("cdk-sell:server:checkItem", function (cb, itemAmount)
         if cb then
             if hasAsked[targetEntity] then
@@ -39,10 +53,9 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 local sellAmount = math.random(1, itemAmount)
                 lib.notify({
                     type = 'inform',
-                    description = 'Du prøver at sælge ' .. sellAmount .. " " .. args.label .. " til " .. entity.entity,
+                    description = 'Du prøver at sælge ' .. sellAmount .. " " .. args.label .. ' til personen',
                 })
             
-                -- Freeze entity
                 local playerPed = PlayerPedId()
                 local playerPedHeading = GetEntityHeading(playerPed)
                 local playerPedCoords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.0, 0.0)
@@ -125,10 +138,9 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 })
         end
     end, args)
+    end
 end)
 
-
--- Takes info from Config.Items and puts it into the option table
 function findItems(option)
     for _, v in pairs(Config.Items) do
         local item = v.item
