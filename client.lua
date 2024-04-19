@@ -11,20 +11,10 @@ CreateThread(function ()
             label = 'Sælg',
             icon = 'fas fa-dollar-sign',
             onSelect = function ()
-                lib.showMenu('sell')
+                findItems(option)
             end,
         }
     })
-    
-    findItems(option)
-    
-    lib.registerMenu({
-        id = 'sell',
-        title = 'Sælg',
-        options = option,
-    }, function(_, _, args)
-        toggleSelling(args)
-    end)
 end)
 
 RegisterNetEvent('cdk-sell:client:sellProcess')
@@ -142,6 +132,7 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
 end)
 
 function findItems(option)
+    option = {}
     for _, v in pairs(Config.Items) do
         local item = v.item
         ESX.TriggerServerCallback("cdk-sell:server:findItem", function (itemAmount)
@@ -158,6 +149,16 @@ function findItems(option)
         icon = 'fas fa-times',
         args = {item = nil, stop = true},
     })
+
+    lib.registerMenu({
+        id = 'sell',
+        title = 'Sælg',
+        options = option,
+    }, function(_, _, args)
+        toggleSelling(args)
+    end)
+    
+    lib.showMenu('sell')
 end
 
 
