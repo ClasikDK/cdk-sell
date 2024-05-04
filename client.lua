@@ -51,13 +51,12 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 local playerPedCoords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 1.0, 0.0)
                 local npcPed = entity.entity
 
-                FreezeEntityPosition(playerPed, true)
-                FreezeEntityPosition(npcPed, true)
-
-                SetEntityHeading(npcPed, playerPedHeading - 180.1)
-                SetEntityCoordsNoOffset(npcPed, playerPedCoords.x, playerPedCoords.y, playerPedCoords.z, 0)
-
                 ClearPedTasksImmediately(npcPed)
+
+                TaskTurnPedToFaceEntity(npcPed, playerPed, 1000)
+                TaskTurnPedToFaceEntity(playerPed, npcPed, 1000)
+
+                Wait(1000)
                 RequestAnimDict("mp_common")
                 while not HasAnimDictLoaded("mp_common") do
                     Wait(100)
@@ -114,10 +113,12 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                     end
                     Wait(100)
                     TaskPlayAnim(npcPed, dict, anim, 8.0, 8.0, 3000, 0, 0, 0, 0, 0)
-                        lib.notify({
-                            type = 'warning',
-                            description = 'Person har ringet efter politet...',
-                        })
+                    lib.notify({
+                        type = 'warning',
+                        description = 'Person har ringet efter politet...',
+                    })
+                    Wait(3000)
+                    ClearPedTasksImmediately(npcPed)
                     end
                 end
             end
