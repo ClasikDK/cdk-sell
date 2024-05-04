@@ -57,15 +57,23 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 TaskTurnPedToFaceEntity(playerPed, npcPed, 1000)
 
                 Wait(1000)
-                RequestAnimDict("mp_common")
+                local animDict = "mp_common"
+                local cashModel = joaat("prop_cash_pile_01")
+                local drugModel = joaat("prop_meth_bag_01")
+                lib.requestAnimDict(animDict)
+                lib.requestModel(cashModel)
+                lib.requestModel(drugModel)
+                --[[RequestAnimDict("mp_common")
                 while not HasAnimDictLoaded("mp_common") do
                     Wait(100)
                 end
-                Wait(100)
-                TaskPlayAnim(npcPed, "mp_common", "givetake1_a", 8.0, 1.0, 3000, 0, 0, 0, 0, 0)
-                TaskPlayAnim(playerPed, "mp_common", "givetake1_b", 8.0, 1.0, 3000, 0, 0, 0, 0, 0)
-
-                -- Start progress circle and animation to player
+                Wait(100)]]
+                local cashProp = CreateObject(cashModel, 0, 0, 0, true, false, false)
+                local drugProp = CreateObject(drugModel, 0, 0, 0, true, false, false)
+                AttachEntityToEntity(cashProp, npcPed, GetPedBoneIndex(npcPed, 28422), 0.0, 0, 0.0, 18.12, 7.21, -12.44, true, true, false, true, 1, true)
+                AttachEntityToEntity(drugProp, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, 0, 0.0, 18.12, 7.21, -12.44, true, true, false, true, 1, true)
+                TaskPlayAnim(npcPed, animDict, "givetake1_a", 8.0, 1.0, 3000, 0, 0, 0, 0, 0)
+                TaskPlayAnim(playerPed, animDict, "givetake1_a", 8.0, 1.0, 3000, 0, 0, 0, 0, 0)
                 if lib.progressCircle({
                     duration = 3000,
                     position = 'bottom',
@@ -97,6 +105,11 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                         description = 'Du afbrød salget',
                     })
                 end
+                DeleteEntity(cashProp)
+                DeleteEntity(drugProp)
+                Wait(100)
+                SetModelAsNoLongerNeeded(cashModel)
+                SetModelAsNoLongerNeeded(drugModel)
                 ClearPedTasksImmediately(npcPed)
                 ClearPedTasksImmediately(playerPed)
                 FreezeEntityPosition(playerPed, false)
@@ -106,19 +119,23 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                     local npcPed = entity.entity
                     local dict = "cellphone@"
                     local anim = "cellphone_call_listen_base"
+                    local phoneModel = joaat("prop_amb_phone")
                     ClearPedTasksImmediately(npcPed)
-                    RequestAnimDict(dict)
-                    while not HasAnimDictLoaded(dict) do
-                        Wait(100)
-                    end
+                    lib.requestAnimDict(dict)
+                    lib.requestModel(phoneModel)
                     Wait(100)
                     TaskPlayAnim(npcPed, dict, anim, 8.0, 8.0, 3000, 0, 0, 0, 0, 0)
+                    local phoneProp = CreateObject(phoneModel, 0, 0, 0, true, false, false)
+                    AttachEntityToEntity(phoneProp, npcPed, GetPedBoneIndex(npcPed, 28422), 0.0, 0.0, 0.0, 18.12, 7.21, -12.44, true, true, false, true, 1, true)
                     lib.notify({
                         type = 'warning',
                         description = 'Person har ringet efter politet...',
                     })
                     Wait(3000)
                     ClearPedTasksImmediately(npcPed)
+                    DeleteEntity(phoneProp)
+                    Wait(100)
+                    SetModelAsNoLongerNeeded(phoneModel)
                     end
                 end
             end
