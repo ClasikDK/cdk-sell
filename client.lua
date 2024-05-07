@@ -40,6 +40,9 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 if itemAmount > Config.MaxSellAmount then
                     itemAmount = Config.MaxSellAmount
                 end
+                local pedCoords = GetEntityCoords(PlayerPedId())
+                local pedZone = GetNameOfZone(pedCoords.x, pedCoords.y, pedCoords.z)
+                local sellMultiplier = Config.Zones[pedZone].multiplier
                 local sellAmount = math.random(1, itemAmount)
                 lib.notify({
                     type = 'inform',
@@ -91,13 +94,21 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 }) then
                     -- Rewards player
                     ESX.TriggerServerCallback("cdk-sell:server:reward", function (cb)
-                        if cb then
+                        if sellMultiplier < 1 then
+                            lib.notify({
+                                type = 'warning',
+                                description = "Der er ikke så meget efterspørgsel for stoffer i dette område, du fik " .. math.floor(sellMultiplier * 100) .. "% af normal prisen",
+                                duration = 7500,
+                            })
+                        elseif sellMultiplier >= 1.5 then
                             lib.notify({
                                 type = 'success',
-                                description = 'Du solgte ' .. sellAmount .. " " .. args.label .. ' for ' .. "(antal penge)" .. ',-',
+                                description = "Der er stor efterspørgsel for stoffer i dette område, du fik " .. math.floor(sellMultiplier * 100) .. "% af normal prisen",
+                                duration = 7500,
                             })
                         end
-                    end, args, sellAmount)
+                    end, args, sellAmount, sellMultiplier)
+                    print(sellMultiplier)
                 else
                     
                     lib.notify({
@@ -142,7 +153,7 @@ AddEventHandler('cdk-sell:client:sellProcess', function (args, entity)
                 if not cb then
                 lib.notify({
                     type = 'error',
-                    description = 'Du har ikke nogen ' .. args.label .. ' at sælge',
+                    description = 'Du har ikke noget ' .. args.label .. ' at sælge',
                 })
         end
     end, args)

@@ -1,20 +1,114 @@
-Config = {}
+Config = {
+    SellChance = 85, -- Chance of selling the item in percentage
+    GiveBlackMoney = true, -- If true, the player will receive black money, if false, the player will receive normal cash
+    MaxSellAmount = 5, -- Max amount of items that can be sold at once
 
-Config.SellChance = 85 -- Chance of selling the item in percentage
-Config.GiveBlackMoney = true -- If true, the player will receive black money, if false, the player will receive normal cash
-Config.MaxSellAmount = 5 -- Max amount of items that can be sold at once
-
-Config.Items = {
-    ["cannabis"] = { -- Item name
-        label = "Cannabis", -- Item label
-        item = "cannabis", -- Item spawn id
-        priceMax = 1500, -- Max sell price
-        priceMin = 750 -- Min sell price
+    Items = {
+        ["cannabis"] = { -- Item name
+            label = "Cannabis", -- Item label
+            item = "cannabis", -- Item spawn id
+            priceMax = 1500, -- Max sell price
+            priceMin = 750 -- Min sell price
+        },
+        ["marijuana"] = {
+            label = "Marijuana",
+            item = "marijuana",
+            priceMax = 1250,
+            priceMin = 500
+        }
     },
-    ["marijuana"] = {
-        label = "Marijuana",
-        item = "marijuana",
-        priceMax = 1250,
-        priceMin = 500
+
+    Zones = {
+        AIRP = { multiplier = math.random() * (2 - 0.5) + 0.5 }, -- Multiplier for the sell price in this zone percentage
+        ALAMO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ALTA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ARMYB = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BANHAMC = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BANNING = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BEACH = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BHAMCA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BRADP = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BRADT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        BURTON = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CALAFB = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CANNY = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CCREAK = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CHAMH = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CHIL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CHU = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CMSW = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        CYPRE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DAVIS = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DELBE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DELPE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DELSOL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DESRT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DOWNT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        DTVINE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        EAST_V = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        EBURO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ELGORL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ELYSIAN = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        GALFISH = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        GOLF = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        GRAPES = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        GREATC = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        HARMO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        HAWICK = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        HORS = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        HUMLAB = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        JAIL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        KOREAT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LACT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LAGO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LDAM = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LEGSQU = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LMESA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        LOSPUER = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MIRR = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MORN = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MOVIE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MTCHIL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MTGORDO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MTJOSE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        MURRI = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        NCHU = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        NOOSE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        OCEANA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PALCOV = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PALETO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PALFOR = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PALHIGH = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PALMPOW = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PBLUFF = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PBOX = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PROCOB = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        RANCHO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        RGLEN = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        RICHM = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ROCKF = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        RTRAK = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        SANAND = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        SANCHIA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        SANDY = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        SKID = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        SLAB = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        STAD = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        STRAW = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        TATAMO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        TERMINA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        TEXTI = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        TONGVAH = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        TONGVAV = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        VCANA = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        VESP = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        VINE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        WINDF = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        WVINE = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ZANCUDO = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ZP_ORT = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ZQ_UAR = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        PROL = { multiplier = math.random() * (2 - 0.5) + 0.5 },
+        ISHeist = { multiplier = math.random() * (2 - 0.5) + 0.5 },
     }
 }
