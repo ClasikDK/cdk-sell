@@ -1,14 +1,14 @@
 Config = {
-    SellChance = 85, -- Chance of selling the item in percentage
+    SellChance = 85,       -- Chance of selling the item in percentage
     GiveBlackMoney = true, -- If true, the player will receive black money, if false, the player will receive normal cash
-    MaxSellAmount = 5, -- Max amount of items that can be sold at once
+    MaxSellAmount = 5,     -- Max amount of items that can be sold at once
 
     Items = {
-        ["cannabis"] = { -- Item name
+        ["cannabis"] = {        -- Item name
             label = "Cannabis", -- Item label
-            item = "cannabis", -- Item spawn id
-            priceMax = 1500, -- Max sell price
-            priceMin = 750 -- Min sell price
+            item = "cannabis",  -- Item spawn id
+            priceMax = 1500,    -- Max sell price
+            priceMin = 750      -- Min sell price
         },
         ["marijuana"] = {
             label = "Marijuana",
