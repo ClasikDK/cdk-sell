@@ -3,8 +3,10 @@ local selling = false
 local hasAsked = {}
 local option = {}
 
-CreateThread(function()
-    Wait(5000)
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function()
+    --CreateThread(function()
+    Wait(2000)
     lib.addRadialItem({
         {
             id = 'sell',
@@ -194,6 +196,7 @@ function toggleSelling(args)
             type = 'inform',
             description = 'Du er stoppet med at sælge',
         })
+        hasAsked = {}
     else
         if selling then
             lib.notify({
