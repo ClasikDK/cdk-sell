@@ -4,15 +4,18 @@ Config = {
     MaxSellAmount = 5,     -- Max amount of items that can be sold at once
 
     Items = {
-        ["cannabis"] = {        -- Item name
-            label = "Cannabis", -- Item label
-            item = "cannabis",  -- Item spawn id
-            priceMax = 1500,    -- Max sell price
-            priceMin = 750      -- Min sell price
+        ["cocaine"] = {        -- Item name/id
+            label = "Cocaine", -- Item label
+            priceMax = 1500,   -- Max sell price
+            priceMin = 750     -- Min sell price
         },
         ["marijuana"] = {
             label = "Marijuana",
-            item = "marijuana",
+            priceMax = 1250,
+            priceMin = 500
+        },
+        ["meth"] = {
+            label = "Meth",
             priceMax = 1250,
             priceMin = 500
         }

@@ -1,4 +1,4 @@
-ESX.RegisterServerCallback("cdk-sell:server:reward", function (src, cb, args, sellAmount, sellMultiplier)
+ESX.RegisterServerCallback("cdk-sell:server:reward", function(src, cb, args, sellAmount, sellMultiplier)
     local xPlayer = ESX.GetPlayerFromId(src)
     local randomPrice = math.random(args.priceMin, args.priceMax)
     xPlayer.removeInventoryItem(args.item, sellAmount)
@@ -10,7 +10,7 @@ ESX.RegisterServerCallback("cdk-sell:server:reward", function (src, cb, args, se
     cb(sellMultiplier)
 end)
 
-ESX.RegisterServerCallback("cdk-sell:server:checkItem", function (src, cb, args)
+ESX.RegisterServerCallback("cdk-sell:server:checkItem", function(src, cb, args)
     local xPlayer = ESX.GetPlayerFromId(src)
     local itemAmount = xPlayer.getInventoryItem(args.item).count
 
@@ -21,7 +21,7 @@ ESX.RegisterServerCallback("cdk-sell:server:checkItem", function (src, cb, args)
     end
 end)
 
-ESX.RegisterServerCallback("cdk-sell:server:findItem", function (src, cb, item)
+ESX.RegisterServerCallback("cdk-sell:server:findItem", function(src, cb, item)
     local xPlayer = ESX.GetPlayerFromId(src)
     local itemAmount = xPlayer.getInventoryItem(item).count
     cb(itemAmount)

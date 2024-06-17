@@ -8,7 +8,7 @@ CreateThread(function()
     lib.addRadialItem({
         {
             id = 'sell',
-            label = 'Sælg',
+            label = 'Sælg Stoffer',
             icon = 'fas fa-dollar-sign',
             onSelect = function()
                 findItems(option)
@@ -159,15 +159,14 @@ end)
 
 function findItems(option)
     option = {}
-    for _, v in pairs(Config.Items) do
-        local item = v.item
+    for k, v in pairs(Config.Items) do
         ESX.TriggerServerCallback("cdk-sell:server:findItem", function(itemAmount)
             table.insert(option, {
-                label = v.label .. ' - ' .. v.priceMin .. ' - ' .. v.priceMax .. 'kr' .. ' - ' .. itemAmount .. ' stk',
-                icon = "nui://ox_inventory/web/images/" .. v.item .. ".png",
-                args = { item = v.item, label = v.label, priceMin = v.priceMin, priceMax = v.priceMax },
+                label = v.label .. ' - ' .. itemAmount .. ' stk',
+                icon = "nui://ox_inventory/web/images/" .. k .. ".png",
+                args = { item = k, label = v.label, priceMin = v.priceMin, priceMax = v.priceMax },
             })
-        end, item)
+        end, k)
     end
     Wait(100)
     table.insert(option, {
