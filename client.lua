@@ -76,7 +76,6 @@ AddEventHandler('cdk-sell:client:sellProcess', function(args, entity)
                         TaskPlayAnim(playerPed, animDict, "givetake1_a", 8.0, 1.0, 3000, 0, 0, 0, 0, 0)
                         if lib.progressCircle({
                                 duration = 3000,
-                                position = 'bottom',
                                 useWhileDead = false,
                                 label = "Sælger",
                                 allowCuffed = false,
@@ -108,7 +107,6 @@ AddEventHandler('cdk-sell:client:sellProcess', function(args, entity)
                                     })
                                 end
                             end, args, sellAmount, sellMultiplier)
-                            print(sellMultiplier)
                         else
                             lib.notify({
                                 type = 'error',
